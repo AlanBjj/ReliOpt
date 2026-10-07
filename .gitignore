@@ -1,0 +1,10 @@
+# data, indexes, model weights, LLM call caches and run outputs (see README: Data, Outputs)
+cache/
+results/
+logs/
+.env
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.DS_Store

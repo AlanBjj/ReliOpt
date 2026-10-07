@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reliopt"
+version = "0.1.0"
+description = "ReliOpt: ReliOpt: Progressive, Cost-Based Optimization for Reliable Compositional Question Answering"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+[tool.setuptools.packages.find]
+include = ["reliopt*"]

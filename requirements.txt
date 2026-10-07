@@ -1,0 +1,14 @@
+# Versions used for the paper (Python 3.12, Linux, NVIDIA GPUs). The GPU packages are only needed to serve the models
+# and to train the Adaptive-RAG classifier; data preparation, analysis, tables and tests run on any OS.
+vllm==0.31.0; sys_platform == "linux"
+torch==2.13.0; sys_platform == "linux"
+transformers==5.17.0; sys_platform == "linux"
+bm25s==0.3.12
+PyStemmer==3.1.0
+numpy==2.3.5
+scipy==1.18.1
+scikit-learn==1.9.1
+requests==2.34.2
+pandas==3.0.6
+tqdm==4.70.1
+matplotlib==3.11.2   # PNG previews of the quality-cost curves (scripts/make_fig_qc.py)
