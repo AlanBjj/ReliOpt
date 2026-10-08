@@ -155,6 +155,8 @@ mkdir -p results/tables results/figures
 python scripts/e9_arag_matched.py && python scripts/e9_signal_check.py && python scripts/e9_escalated.py
 python scripts/e9_complementarity.py
 python scripts/make_table1.py && python scripts/make_table_esc.py && python scripts/make_tables23.py && python scripts/make_table_e8.py
+python scripts/make_table_escalated.py && python scripts/make_table_calsrc.py && python scripts/make_table_rho.py
+python scripts/make_table_case.py --tag qwen3-8b --ds musique --qid 3hop1__63037_567566_84283
 for t in llama31-8b qwen3-8b; do python scripts/make_fig_qc.py --tag $t; done; python scripts/make_fig3.py
 ```
 
