@@ -6,12 +6,12 @@ with \\ours, best EM bold and second underlined per block and column, EM cells t
 reference, the method with escalation (fine scale \\hcs, key \\tintlegendfine: the rows differ by a few points). Tokens per
 question (thousands, prompt + completion, the plan's default execution included for escalated questions) are plain numbers.
 Rows, all at the same operating point (E9_MODE and BUDGET below):
-  \\method{} + esc.        the composed reliability decides (results/e9/<tag>/priced.json, plan/<mode>/<budget>)
+  \\method{}               the composed reliability decides (results/e9/<tag>/priced.json, plan/<mode>/<budget>)
   w/o propagation         the reliability without propagation along the plan (noprop/...)
   type prior              the plan's step types alone (prior/...)
   one price for both      verification and escalation priced with a single lambda (plan/joint/<budget>)
   random escalation       as many escalations per alternative as the method, to random questions (mean of 20 draws)
-  \\method{}, no escalation  e3's method at its priced verification budget (refs.ours, own_tok)
+  \\method{} w/o escalation  e3's method at its priced verification budget (refs.ours, own_tok)
   pre-execution router    the same T5-large classifier as Adaptive-RAG, trained to pick {Plan-Only, IRCoT} from the question
                           text before anything runs (results/e9/<tag>/arag/summary.json, pre_plan_ircot)
   Adaptive-RAG            {no retrieval, single-step RAG, IRCoT} from the question text (arag)
@@ -35,9 +35,9 @@ BACKBONES = {"llama31-8b": "Llama-3.1-8B-Instruct", "qwen3-8b": "Qwen3-8B"}
 BUDGET = "B_IRCoT/2"   # the operating point of the escalation rows
 # The answering-step-only signal is not a row; w/o propagation and
 # type prior stay only if the method's signal does not lose to them on average at equal spend (ABLATED below).
-ROWS = [("plan", r"\method{} + esc."), ("noprop", r"\quad w/o propagation"),
+ROWS = [("plan", r"\method{}"), ("noprop", r"\quad w/o propagation"),
         ("prior", r"\quad type prior"), ("joint", r"\quad one price for both"), ("random", r"\quad random escalation"),
-        ("noesc", r"\method{}, no escalation"), ("pre", r"Pre-exec.\ router"), ("arag", r"Adaptive-RAG (official)"),
+        ("noesc", r"\method{} w/o escalation"), ("pre", r"Pre-exec.\ router"), ("arag", r"Adaptive-RAG (official)"),
         ("oracle", r"Oracle (upper bound)")]
 RULE_BEFORE = {"noesc", "oracle"}
 # Set by scripts/e9_signal_check.py on the final maps (2026-10-08 02:40): at equal spend, averaged over both backbones and

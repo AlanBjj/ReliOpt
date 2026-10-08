@@ -26,7 +26,9 @@ ANCHOR_DS = {("2wikimultihopqa", "Self-Ask"): "south east"}   # 2Wiki: Self-Ask 
 # per backbone where a label would sit on a curve of the method (checked on the rendered PDF, 2026-10-08)
 # (anchor, vertical shift in pt): the label is moved off the curves of the method
 ANCHOR_TAG = {("qwen3-8b", "hotpotqa", "Search-o1"): ("north", -9), ("qwen3-8b", "2wikimultihopqa", "Self-Ask"): ("east", 0),
-              ("qwen3-8b", "2wikimultihopqa", "Search-o1"): ("north", -8), ("qwen3-8b", "musique", "Self-Ask"): ("east", 0)}
+              ("qwen3-8b", "2wikimultihopqa", "Search-o1"): ("north", -8), ("qwen3-8b", "musique", "Self-Ask"): ("east", 0),
+              # MuSiQue: Standard RAG is the lowest point, so a label below it hit the x axis (2026-10-08, larger labels)
+              ("qwen3-8b", "musique", "Standard RAG"): ("west", 2), ("llama31-8b", "musique", "Standard RAG"): ("west", 1)}
 
 
 def main():
@@ -71,18 +73,18 @@ def main():
             if i == 0 and j == 0:
                 opts.append("legend to name=qcleg")
             out.append(r"\nextgroupplot[%s]" % ", ".join(opts))
-            out.append(r"  \addplot[draw=cNeutral!70, line width=0.5pt, mark=none] table[col sep=comma, x=tokens, y=em] {%s};" % f("sc"))
+            out.append(r"  \addplot[draw=cNeutral, line width=0.6pt, mark=none] table[col sep=comma, x=tokens, y=em] {%s};" % f("sc"))
             out.append(r"  \addplot[cIRCoT, cwline, mark=square*] table[col sep=comma, x=tokens, y=em] {%s};" % f("ircot"))
             out.append(r"  \addplot[cOurs, cwline, mark=*] table[col sep=comma, x=tokens, y=em] {%s};" % f("ours"))
             if (data_dir / f"qc_{tag}_{ds}_esc.csv").read_text().count("\n") > 1:   # escalation sweep, labelled at its end
                 out.append(r"  \addplot[cEsc, cwline, mark=triangle*] table[col sep=comma, x=tokens, y=em] {%s} "
-                           r"node[pos=1, anchor=west, font=\tiny, text=black!70] {+\,esc.};" % f("esc"))
-            out.append(r"  \addplot[only marks, mark=diamond*, mark size=1.6pt, draw=black!55, fill=white, "
+                           r"node[pos=1, anchor=west, font=\scriptsize, text=black!85] {\method{}};" % f("esc"))
+            out.append(r"  \addplot[only marks, mark=diamond*, mark size=1.6pt, draw=black!75, fill=white, "
                        r"nodes near coords, point meta=explicit symbolic, visualization depends on={value \thisrow{anchor} \as \lab}, visualization depends on={\thisrow{dy} \as \labdy}, "
-                       r"every node near coord/.append style={font=\tiny, text=black!70, anchor=\lab, inner sep=1.5pt, yshift=\labdy pt}] "
+                       r"every node near coord/.append style={font=\scriptsize, text=black!85, anchor=\lab, inner sep=1.5pt, yshift=\labdy pt}] "
                        r"table[col sep=comma, x=tokens, y=em, meta=label] {%s};" % f("points"))
             if i == 0 and j == 0:
-                out.append(r"  \legend{{Self-Consistency ($k=1\ldots10$)}, {IRCoT (three reduced budgets; official setting at right)}, {\method{} (price sweep)}, {\method{} + escalation (price sweep)}, {other baselines}}")
+                out.append(r"  \legend{{Self-Consistency ($k=1\ldots10$)}, {IRCoT (three reduced budgets; official setting at right)}, {\method{} w/o escalation (price sweep)}, {\method{} (budget sweep)}, {other baselines}}")
     out += [r"\end{groupplot}",
             r"\node[anchor=south] at ($(group c2r1.north)+(0,0.55cm)$) {\pgfplotslegendfromname{qcleg}};",
             r"\end{tikzpicture}", ""]

@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATASETS = [("hotpotqa", "HotpotQA"), ("2wikimultihopqa", "2WikiMultiHopQA"), ("musique", "MuSiQue")]
 BACKBONES = {"llama31-8b": "Llama-3.1-8B-Instruct", "qwen3-8b": "Qwen3-8B"}
 ROWS = [("plan_only", "Plan-Only (no verification)"), ("verify_all", "Verify-All"), ("type_static", "Type-Static"),
-        ("question_level", "Question-Level"), ("full", r"\method{}"), ("no_prop", r"\quad w/o propagation"),
+        ("question_level", "Question-Level"), ("full", r"\method{} w/o escalation"), ("no_prop", r"\quad w/o propagation"),
         ("prior_eps", r"\quad w/o instance estimates"), ("no_probe", r"\quad w/o probing"),
         ("gbdt", r"\quad boosted-tree estimator"), ("oracle", "Oracle, single step (upper bound)")]
 COLS = [("EM@B_SC", r"$B_{\mathrm{SC}}$"), ("EM@B_SC/2", r"$B_{\mathrm{SC}}/2$"), ("AUC-QC", "AUC")]
@@ -95,7 +95,7 @@ def table_alloc(tags):
 
 # One-column version for the EDBT build: EM at B_SC only, without the probing and boosted-tree rows (they change EM by at most 0.5; stated in the text).
 SMALL_ROWS = [("plan_only", "Plan-Only"), ("verify_all", "Verify-All"), ("type_static", "Type-Static"),
-              ("question_level", "Question-Level"), ("full", r"\method{}"), ("no_prop", r"\quad w/o propagation"),
+              ("question_level", "Question-Level"), ("full", r"\method{} w/o escalation"), ("no_prop", r"\quad w/o propagation"),
               ("prior_eps", r"\quad w/o instance est."), ("oracle", "Oracle (one step)")]
 
 
