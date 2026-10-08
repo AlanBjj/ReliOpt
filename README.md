@@ -1,6 +1,6 @@
 # ReliOpt
 
-Code for the paper **"ReliOpt: Progressive, Cost-Based Optimization for Reliable Compositional Question Answering"** (Jie Bao, Haojie Wu, Xiaolu Chen, Yu Gao, Zhen Chen, Yong Liao; submitted to EDBT).
+Code for the paper **"ReliOpt: Progressive, Cost-Based Optimization for Reliable Compositional Question Answering"** (Jie Bao\*, Haojie Wu\*, Xiaolu Chen, Yu Gao, Zhen Chen, Yong Liao; \*equal contribution; submitted to EDBT).
 
 ReliOpt treats where to spend tokens for reliability in compositional question answering as cost-based optimization
 over a per-question query plan. The cheap plan runs first; what its steps leave behind decides whether to accept the

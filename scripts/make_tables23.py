@@ -81,7 +81,7 @@ def alloc_block(tag):
 
 
 def table_alloc(tags):
-    lines = [HEADER + r"\begin{tabular}{@{}l" + "ccc" * len(DATASETS) + "@{}}", r"\toprule",
+    lines = [HEADER + r"\begin{tabular}{@{}l" + "ccc" * len(DATASETS) + r"@{\hspace{\tabcolsep}}}", r"\toprule",
              " & " + " & ".join(rf"\multicolumn{{3}}{{c}}{{{name}}}" for _, name in DATASETS) + r" \\",
              "".join(rf"\cmidrule(lr){{{2 + 3 * i}-{4 + 3 * i}}}" for i in range(len(DATASETS))),
              r"Variant (EM at budget) & " + " & ".join(h for _ in DATASETS for _, h in COLS) + r" \\", r"\midrule"]
@@ -101,7 +101,7 @@ SMALL_ROWS = [("plan_only", "Plan-Only"), ("verify_all", "Verify-All"), ("type_s
 
 def table_alloc_small(tags):
     ncol = 1 + len(DATASETS)
-    lines = [HEADER + r"\begin{tabular}{@{}l" + "c" * len(DATASETS) + "@{}}", r"\toprule",
+    lines = [HEADER + r"\begin{tabular}{@{}l" + "c" * len(DATASETS) + r"@{\hspace{\tabcolsep}}}", r"\toprule",
              r"Allocation (EM at $B_{\mathrm{SC}}$) & " + " & ".join(name.replace("WikiMultiHopQA", "Wiki") for _, name in DATASETS)
              + r" \\", r"\midrule"]
     for i, tag in enumerate(tags):
@@ -138,7 +138,7 @@ def load_diag(tag):
 
 
 def table_diag(tags):
-    lines = [HEADER.replace("summary.json", "diag_estimators.json") + r"\begin{tabular}{@{}l" + "cc" * len(DATASETS) + "@{}}",
+    lines = [HEADER.replace("summary.json", "diag_estimators.json") + r"\begin{tabular}{@{}l" + "cc" * len(DATASETS) + r"@{\hspace{\tabcolsep}}}",
              r"\toprule",
              " & " + " & ".join(rf"\multicolumn{{2}}{{c}}{{{name}}}" for _, name in DATASETS) + r" \\",
              "".join(rf"\cmidrule(lr){{{2 + 2 * i}-{3 + 2 * i}}}" for i in range(len(DATASETS))),
